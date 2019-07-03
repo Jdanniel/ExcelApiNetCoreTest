@@ -42,7 +42,7 @@ namespace ExcelApiNetCoreTest.Controllers
             }
             try
             {
-                String mn = DateTime.Now.Month.ToString();
+                String mn = DateTime.Now.AddMonths(1).Month.ToString();
                 String yy = DateTime.Now.Year.ToString();
 
                 BdCargasMasivas carga = new BdCargasMasivas()
@@ -113,7 +113,7 @@ namespace ExcelApiNetCoreTest.Controllers
             }
             try
             {
-                String mn = DateTime.Now.Month.ToString();
+                String mn = DateTime.Now.AddMonths(1).Month.ToString();
                 String yy = DateTime.Now.Year.ToString();
 
                 BdCargasMasivas carga = new BdCargasMasivas()
