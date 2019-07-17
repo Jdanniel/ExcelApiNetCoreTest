@@ -1,4 +1,5 @@
 ﻿using System;
+using ExcelApiNetCoreTest.Models.Stored_Procedure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -25346,6 +25347,9 @@ namespace ExcelApiNetCoreTest.DBModels
                     .HasMaxLength(255)
                     .IsUnicode(false);
             });
+            modelBuilder.Query<SpGetConsultaUnidades>();
+            modelBuilder.Query<SpGetLayoutMasivo>();
+            modelBuilder.Query<SpGetNegocios>();
         }
     }
 }
