@@ -830,7 +830,7 @@ namespace ExcelApiNetCoreTest.DBModels
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=192.168.100.56; Database=ELAVON-TEST; User Id=sa; Password=b4ckl45h; Persist Security Info=False;");
+                optionsBuilder.UseSqlServer("Server=192.168.101.3;Persist Security Info=True;connect timeout=400000;Database=ELAVON;User Id=api-rollloading-prod;Password=nZTE8W0j4ErIIjROgYZynwRpO;");
             }
         }
 

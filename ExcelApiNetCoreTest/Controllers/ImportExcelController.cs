@@ -30,7 +30,7 @@ namespace ExcelApiNetCoreTest.Controllers
         }
 
         [HttpPost("transacciones")]
-        public async Task<ActionResult> OnPostImportTransactions(IFormFile formFile, [FromForm] int IdUsuario, CancellationToken cancellationToken)
+        public async Task<ActionResult> OnPostImportTransactions(IFormFile formFile, [FromForm] int IdUsuario,[FromForm] int actualizar, CancellationToken cancellationToken)
         {
             if (formFile == null || formFile.Length <= 0)
             {
@@ -89,8 +89,12 @@ namespace ExcelApiNetCoreTest.Controllers
                     }
                 }
 
-                await context_.Database.ExecuteSqlCommandAsync("EXEC SP_PROCESAR_CARGA_TRANSACCIONES @ID_CARGA",
-                    new SqlParameter("@ID_CARGA", idcarga));
+                var listaParams = new List<SqlParameter>();
+                listaParams.Add(new SqlParameter("@ID_CARGA", idcarga));
+                listaParams.Add(new SqlParameter("@ID_USUARIO", IdUsuario));
+                listaParams.Add(new SqlParameter("@ACTUALIZA", actualizar));
+
+                await context_.Database.ExecuteSqlCommandAsync("EXEC SP_PROCESAR_CARGA_TRANSACCIONES @ID_CARGA,@ACTUALIZA,@ID_USUARIO", listaParams);
 
                 return Ok(idcarga.ToString());
             }
@@ -101,7 +105,7 @@ namespace ExcelApiNetCoreTest.Controllers
         }
 
         [HttpPost("Bloqueos")]
-        public async Task<ActionResult> OnPostImportLocks(IFormFile formFile, [FromForm] int IdUsuario, CancellationToken cancellationToken)
+        public async Task<ActionResult> OnPostImportLocks(IFormFile formFile, [FromForm] int IdUsuario,[FromForm] int actualizar, CancellationToken cancellationToken)
         {
             if (formFile == null || formFile.Length <= 0)
             {
@@ -171,8 +175,12 @@ namespace ExcelApiNetCoreTest.Controllers
                     }
                 }
 
-                await context_.Database.ExecuteSqlCommandAsync("EXEC SP_PROCESAR_CARGA_BLOQUEOS @ID_CARGA",
-                    new SqlParameter("@ID_CARGA", idcarga));
+                var listaParams = new List<SqlParameter>();
+                listaParams.Add(new SqlParameter("@ID_CARGA", idcarga));
+                listaParams.Add(new SqlParameter("@ID_USUARIO", IdUsuario));
+                listaParams.Add(new SqlParameter("@ACTUALIZA", actualizar));
+
+                await context_.Database.ExecuteSqlCommandAsync("EXEC SP_PROCESAR_CARGA_BLOQUEOS @ID_CARGA,@ACTUALIZA,@ID_USUARIO", listaParams);
 
                 return Ok(idcarga.ToString());
             }
